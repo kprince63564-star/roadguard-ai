@@ -1,0 +1,48 @@
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="en-US">
+  <voice name="en-US-AndrewMultilingualNeural">
+    <prosody rate="0.98" pitch="+0Hz">
+      <!-- Chapter 1: Introduction (0:00 - 0:08) -->
+      <emphasis level="strong">Welcome to ROADGUARD AI</emphasis>
+      <break time="250ms"/>
+      the next-generation smart-city platform for road damage intelligence and municipal maintenance triage.
+      <break time="1200ms"/>
+
+      <!-- Chapter 2: The Infrastructure Crisis (0:08 - 0:17) -->
+      Every year, billions of dollars are lost to road decay.
+      <break time="300ms"/>
+      Traditional inspections are slow, paper-bound, and leave hazardous potholes unattended.
+      <break time="1100ms"/>
+
+      <!-- Chapter 3: 4-Step Solution Pipeline (0:17 - 0:26) -->
+      <emphasis level="moderate">ROADGUARD AI</emphasis> transforms this into an automated, four-step intelligence pipeline:
+      <break time="250ms"/>
+      capture, detect, prioritize, and dispatch.
+      <break time="1200ms"/>
+
+      <!-- Chapter 4: Computer Vision Engine (0:26 - 0:38) -->
+      Powered by <emphasis level="moderate">Ultralytics YOLO</emphasis>, our computer vision engine scans road imagery in real time,
+      <break time="200ms"/>
+      localizing potholes and structural fissures with high-confidence bounding box overlays and surface area metrics.
+      <break time="1100ms"/>
+
+      <!-- Chapter 5: Explainable Priority Scoring (0:38 - 0:50) -->
+      Our explainable scoring engine calculates an objective <emphasis level="moderate">0 to 100 visual hazard index</emphasis>
+      <break time="250ms"/>
+      factoring in damaged surface area, defect cluster density, and roadway traffic context.
+      <break time="1200ms"/>
+
+      <!-- Chapter 6: Live Geospatial GIS Map (0:50 - 1:01) -->
+      Every incident is mapped on an interactive GIS telemetry system with priority-coded markers, cluster analysis, and embedded photographic evidence.
+      <break time="1100ms"/>
+
+      <!-- Chapter 7: Authority Operations & PDF Work Orders (1:01 - 1:10) -->
+      Municipal authorities manage a live, ranked maintenance queue, audit repair lifecycles, and generate official civil engineering PDF work orders with a single click.
+      <break time="1000ms"/>
+
+      <!-- Chapter 8: Conclusion & Call to Action (1:10 - 1:15) -->
+      <emphasis level="strong">ROADGUARD AI:</emphasis>
+      <break time="200ms"/>
+      Building safer, smarter, data-driven municipal infrastructure.
+    </prosody>
+  </voice>
+</speak>

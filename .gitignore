@@ -1,0 +1,37 @@
+# ROADGUARD AI - Git Ignore
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+.venv/
+env/
+venv/
+ENV/
+.uv_cache/
+.uv_python/
+
+# Model Weights (Large binary checkpoints)
+models/*.pt
+models/*.onnx
+models/*.engine
+models/*.tflite
+
+# Local Media & Uploads
+uploads/*.jpg
+uploads/*.jpeg
+uploads/*.png
+outputs/*.jpg
+outputs/*.jpeg
+outputs/*.png
+outputs/*.mp4
+outputs/reports/*.pdf
+
+# Local Databases & Secrets
+*.exe
+*.db-journal
+.env
+.DS_Store
+Thumbs.db

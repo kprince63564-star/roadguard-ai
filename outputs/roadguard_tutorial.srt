@@ -1,0 +1,34 @@
+1
+00:00:00,000 --> 00:00:10,000
+Welcome to ROADGUARD AI — your complete guide to smart road health inspection and municipal maintenance triage.
+रोडगार्ड एआई में आपका स्वागत है — सड़क स्वास्थ्य निरीक्षण और रखरखाव का संपूर्ण गाइड।
+
+2
+00:00:10,000 --> 00:00:20,000
+Step 1: Capture or Upload. Take a photo of the damaged pavement using your device camera, or upload image files from your computer.
+चरण 1: फोटो लें या अपलोड करें। सड़क की तस्वीर खींचे या अपने डिवाइस से फोटो फाइल अपलोड करें।
+
+3
+00:00:20,000 --> 00:00:31,000
+Step 2: AI Detection. Click 'Analyze Road Damage'. Ultralytics YOLO scans asphalt in milliseconds to localize potholes and cracks with confidence scores.
+चरण 2: एआई द्वारा पहचान। 'विश्लेषण करें' पर क्लिक करें। YOLO गड्ढों और दरारों का सटीक पता लगाता है।
+
+4
+00:00:31,000 --> 00:00:42,000
+Step 3: Location Pinning. Coordinates are auto-extracted from photo GPS, or you can click directly on the interactive GIS dark map to pin the incident.
+चरण 3: स्थान चयन। फोटो से जीपीएस स्वतः प्राप्त होता है, या आप लाइव नक्शे पर क्लिक करके स्थान तय कर सकते हैं।
+
+5
+00:00:42,000 --> 00:00:53,000
+Step 4: Priority Scoring. The explainable engine computes a 0 to 100 civil engineering hazard index factoring damaged area and traffic density.
+चरण 4: प्राथमिकता स्कोर। सिस्टम सड़क प्रकार और सतह क्षेत्रफल के आधार पर 0 से 100 प्राथमिकता स्कोर तय करता है।
+
+6
+00:00:53,000 --> 00:01:04,000
+Step 5 and 6: Submit and Track. Save the report to the municipal database, audit the repair lifecycle, and export official PDF work orders.
+चरण 5 और 6: रिपोर्ट दर्ज करें और ट्रैक करें। डेटाबेस में सहेजें, स्थिति अपडेट करें और आधिकारिक पीडीएफ वर्क ऑर्डर डाउनलोड करें।
+
+7
+00:01:04,000 --> 00:01:12,000
+You are now ready to use ROADGUARD AI! Building safer, smarter, data-driven municipal infrastructure.
+अब आप रोडगार्ड एआई का उपयोग करने के लिए तैयार हैं! सुरक्षित और स्मार्ट सड़कों के निर्माण में सहयोग करें।

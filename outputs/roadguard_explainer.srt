@@ -1,0 +1,31 @@
+1
+00:00:00,500 --> 00:00:07,500
+Welcome to ROADGUARD AI — the next-generation smart-city platform for road damage intelligence and municipal maintenance triage.
+
+2
+00:00:08,200 --> 00:00:16,500
+Every year, billions are lost to road decay. Traditional inspections are slow, paper-bound, and leave hazardous potholes unattended.
+
+3
+00:00:17,200 --> 00:00:25,500
+ROADGUARD AI transforms this into an automated four-step intelligence pipeline: capture, detect, prioritize, and dispatch.
+
+4
+00:00:26,500 --> 00:00:37,500
+Powered by Ultralytics YOLO, our computer vision engine scans road imagery in real time, localizing potholes and fissures with high-confidence bounding boxes.
+
+5
+00:00:38,200 --> 00:00:49,500
+Our explainable scoring engine calculates an objective 0 to 100 hazard index based on damaged surface area, defect density, and roadway traffic context.
+
+6
+00:00:50,200 --> 00:01:00,500
+Every incident is mapped on an interactive GIS telemetry system with priority-coded markers, cluster analysis, and embedded photo evidence.
+
+7
+00:01:01,200 --> 00:01:09,800
+Municipal authorities triage a ranked queue, audit repair lifecycles, and generate official civil engineering PDF work orders with one click.
+
+8
+00:01:10,500 --> 00:01:15,000
+ROADGUARD AI: Building safer, smarter, data-driven municipal infrastructure.
