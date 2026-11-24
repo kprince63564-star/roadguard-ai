@@ -221,18 +221,23 @@ def render_reports_page():
                 act_col1, act_col2 = st.columns([1, 1])
 
                 with act_col1:
+                    pdf_state_key = f"pdf_bytes_{rep_id}"
                     if st.button(f"📄 Generate Official PDF Report ({rep_id})", key=f"btn_pdf_{rep_id}"):
                         with st.spinner("Generating PDF inspection order..."):
                             pdf_file_path = generate_pdf_report(full_rep)
                             with open(pdf_file_path, "rb") as f:
-                                pdf_bytes = f.read()
-                            st.download_button(
-                                label="⬇️ Download Generated PDF",
-                                data=pdf_bytes,
-                                file_name=f"RoadGuard_Report_{rep_id}.pdf",
-                                mime="application/pdf",
-                                key=f"dl_pdf_{rep_id}"
-                            )
+                                st.session_state[pdf_state_key] = f.read()
+                    
+                    if pdf_state_key in st.session_state:
+                        st.download_button(
+                            label="⬇️ Download Generated PDF",
+                            data=st.session_state[pdf_state_key],
+                            file_name=f"RoadGuard_Report_{rep_id}.pdf",
+                            mime="application/pdf",
+                            key=f"dl_pdf_{rep_id}",
+                            type="primary",
+                            use_container_width=True
+                        )
 
                 with act_col2:
                     if is_authority():

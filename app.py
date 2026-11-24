@@ -128,28 +128,16 @@ def main():
             </div>
         """, unsafe_allow_html=True)
 
-        # Sidebar Radio Navigation Options
-        page_display_names = [f"{icon} {t(k)}" for k, _, icon in page_keys]
-        curr_idx = 0
-        for i, (_, slug, _) in enumerate(page_keys):
-            if slug == st.session_state["active_nav_key"]:
-                curr_idx = i
-                break
-
-        selected_radio_name = st.radio(
-            "Sidebar Navigation Menu",
-            page_display_names,
-            index=curr_idx,
-            label_visibility="collapsed",
-            key="sidebar_nav_radio"
-        )
-
-        for i, (k, slug, icon) in enumerate(page_keys):
-            if f"{icon} {t(k)}" == selected_radio_name:
+        # Sidebar Navigation Menu
+        st.markdown(f"<div style='font-size:0.70rem;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:0.09em;margin-bottom:8px;padding-left:2px;'>{t('nav_menu')}</div>", unsafe_allow_html=True)
+        for k, slug, icon in page_keys:
+            is_active = (st.session_state["active_nav_key"] == slug)
+            btn_label = f"{icon}  {t(k)}"
+            btn_type = "primary" if is_active else "secondary"
+            if st.button(btn_label, key=f"side_nav_{slug}", use_container_width=True, type=btn_type):
                 if st.session_state["active_nav_key"] != slug:
                     st.session_state["active_nav_key"] = slug
                     st.rerun()
-                break
 
         st.markdown("<div style='height: 14px;'></div>", unsafe_allow_html=True)
 

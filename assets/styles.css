@@ -57,6 +57,7 @@ header[data-testid="stHeader"] {
     background: transparent !important;
     height: 3rem !important;
     z-index: 99 !important;
+    pointer-events: none !important;
 }
 
 /* Ensure the sidebar toggle icon is always visible and beautifully styled */
@@ -65,6 +66,7 @@ header[data-testid="stHeader"] {
 button[data-testid="baseButton-headerNoPadding"] {
     display: flex !important;
     visibility: visible !important;
+    pointer-events: auto !important;
     background: #181B24 !important;
     color: #F97316 !important;
     border: 1px solid rgba(249, 115, 22, 0.4) !important;
@@ -72,6 +74,7 @@ button[data-testid="baseButton-headerNoPadding"] {
     padding: 4px 8px !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important;
     transition: all 0.2s ease !important;
+    cursor: pointer !important;
 }
 
 [data-testid="stSidebarCollapsedControl"]:hover,
@@ -264,57 +267,66 @@ section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked)
    ══════════════════════════════════════════════════════════════════════ */
 
 /* Regular / Secondary Buttons: Tactile Dark Slate with Warm Highlight */
-div.stButton > button {
+div.stButton > button,
+div.stButton > button[kind="secondary"],
+button[data-testid="baseButton-secondary"] {
     background: linear-gradient(180deg, #222631 0%, #181A22 100%) !important;
     color: #F8FAFC !important;
     font-weight: 600 !important;
-    font-size: 0.88rem !important;
+    font-size: 0.85rem !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: var(--radius-md) !important;
-    padding: 9px 22px !important;
+    padding: 8px 16px !important;
     cursor: pointer !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1) !important;
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
     letter-spacing: 0.01em !important;
 }
 
-div.stButton > button:hover {
+div.stButton > button:hover,
+div.stButton > button[kind="secondary"]:hover,
+button[data-testid="baseButton-secondary"]:hover {
     background: linear-gradient(180deg, #2A303D 0%, #1E222B 100%) !important;
     border-color: rgba(249, 115, 22, 0.6) !important;
     color: #FFFFFF !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.5), 0 0 12px rgba(249, 115, 22, 0.2), inset 0 1px 0 rgba(255,255,255,0.15) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5), 0 0 10px rgba(249, 115, 22, 0.2), inset 0 1px 0 rgba(255,255,255,0.15) !important;
 }
 
-div.stButton > button:active {
+div.stButton > button:active,
+button[data-testid="baseButton-secondary"]:active {
     transform: translateY(1px) !important;
     box-shadow: 0 1px 2px rgba(0,0,0,0.6), inset 0 2px 4px rgba(0,0,0,0.4) !important;
 }
 
 /* Primary Action Buttons: High-Vis Safety Amber Gradient with Warm Glow */
 button[kind="primary"],
+button[data-testid="baseButton-primary"],
 div.stFormSubmitButton > button {
     background: linear-gradient(180deg, #FB923C 0%, #EA580C 50%, #C2410C 100%) !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
-    font-size: 0.92rem !important;
+    font-size: 0.88rem !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
     border-radius: var(--radius-md) !important;
-    padding: 10px 24px !important;
+    padding: 8px 18px !important;
+    cursor: pointer !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 4px 14px rgba(234, 88, 12, 0.35), inset 0 1px 0 rgba(255,255,255,0.3) !important;
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
     text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
 }
 
 button[kind="primary"]:hover,
+button[data-testid="baseButton-primary"]:hover,
 div.stFormSubmitButton > button:hover {
     background: linear-gradient(180deg, #FFA057 0%, #F97316 50%, #D4440B 100%) !important;
-    transform: translateY(-2px) !important;
+    transform: translateY(-1px) !important;
     border-color: rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 6px 22px rgba(249, 115, 22, 0.55), 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.4) !important;
+    box-shadow: 0 6px 20px rgba(249, 115, 22, 0.55), 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.4) !important;
 }
 
 button[kind="primary"]:active,
+button[data-testid="baseButton-primary"]:active,
 div.stFormSubmitButton > button:active {
     transform: translateY(1px) !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.6), inset 0 2px 5px rgba(0,0,0,0.4) !important;

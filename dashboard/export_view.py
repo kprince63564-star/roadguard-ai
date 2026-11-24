@@ -50,24 +50,27 @@ def render_export_page():
         selected_label = st.selectbox("Select Report to Print:", list(report_options.keys()))
         selected_id = report_options[selected_label]
 
+        export_pdf_key = f"export_pdf_{selected_id}"
         if st.button("🔨 Compile Official Inspection PDF", type="primary"):
             with st.spinner(f"Rendering PDF layout for {selected_id}..."):
                 full_rep = get_report_by_id(selected_id)
                 if full_rep:
                     pdf_path = generate_pdf_report(full_rep)
                     with open(pdf_path, "rb") as f:
-                        pdf_data = f.read()
-
+                        st.session_state[export_pdf_key] = f.read()
                     st.success(f"PDF Inspection Work Order compiled successfully!")
-                    st.download_button(
-                        label=f"⬇️ Download {selected_id} PDF Work Order",
-                        data=pdf_data,
-                        file_name=f"RoadGuard_Inspection_{selected_id}.pdf",
-                        mime="application/pdf",
-                        use_container_width=True
-                    )
                 else:
                     st.error("Failed to load report data.")
+
+        if export_pdf_key in st.session_state:
+            st.download_button(
+                label=f"⬇️ Download {selected_id} PDF Work Order",
+                data=st.session_state[export_pdf_key],
+                file_name=f"RoadGuard_Inspection_{selected_id}.pdf",
+                mime="application/pdf",
+                type="primary",
+                use_container_width=True
+            )
         st.markdown('</div>', unsafe_allow_html=True)
 
     with tab2:
