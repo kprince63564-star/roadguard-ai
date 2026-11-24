@@ -1,7 +1,7 @@
 """
 ROADGUARD AI - Smart Road Health & Damage Intelligence Platform
-Main application entry point orchestrating sidebar navigation, CSS theming,
-bilingual internationalization (English & हिंदी), database initialization, and routing.
+Main application entry point orchestrating top navigation, sidebar navigation,
+bilingual internationalization (English & हिंदी), and multi-page routing.
 """
 
 import streamlit as st
@@ -45,7 +45,7 @@ def render_top_telemetry_bar(user, model_status):
     engine_label = "YOLOv8 Custom" if model_status.get("is_custom") else "YOLOv8 Vision"
     
     st.markdown(f"""
-        <div style="display: flex; justify-content: space-between; align-items: center; background: linear-gradient(90deg, #161922 0%, #11141A 100%); border: 1px solid rgba(255,255,255,0.08); border-left: 4px solid #F97316; border-radius: 10px; padding: 11px 18px; margin-bottom: 22px; box-shadow: 0 4px 16px rgba(0,0,0,0.4);">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: linear-gradient(90deg, #161922 0%, #11141A 100%); border: 1px solid rgba(255,255,255,0.08); border-left: 4px solid #F97316; border-radius: 10px; padding: 11px 18px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.4);">
             <div style="display: flex; align-items: center; gap: 14px;">
                 <div style="display: flex; align-items: center; gap: 6px;">
                     <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 10px #10B981; display: inline-block;"></span>
@@ -81,6 +81,21 @@ def main():
     detector = get_detector()
     model_status = detector.get_status_info()
 
+    if "active_nav_key" not in st.session_state:
+        st.session_state["active_nav_key"] = "overview"
+
+    # Define all available modules
+    page_keys = [
+        ("nav_overview", "overview", "📊"),
+        ("nav_detect", "detect", "🔍"),
+        ("nav_reports", "reports", "📋"),
+        ("nav_map", "map", "🗺️"),
+        ("nav_queue", "queue", "⚡"),
+        ("nav_analytics", "analytics", "📈"),
+        ("nav_export", "export", "📄"),
+        ("nav_settings", "settings", "⚙️")
+    ]
+
     # 2. Sidebar Navigation & Branding
     with st.sidebar:
         logo_file = ASSETS_DIR / "logo.png"
@@ -113,32 +128,30 @@ def main():
             </div>
         """, unsafe_allow_html=True)
 
-        # Navigation Options (Bilingual)
-        page_keys = [
-            ("nav_overview", "overview"),
-            ("nav_detect", "detect"),
-            ("nav_reports", "reports"),
-            ("nav_map", "map"),
-            ("nav_queue", "queue"),
-            ("nav_analytics", "analytics"),
-            ("nav_export", "export"),
-            ("nav_settings", "settings")
-        ]
-
-        page_display_names = [t(k) for k, _ in page_keys]
-        selected_page_name = st.radio(
-            "Navigation Menu",
-            page_display_names,
-            label_visibility="collapsed"
-        )
-
-        selected_page_key = "overview"
-        for k, slug in page_keys:
-            if t(k) == selected_page_name:
-                selected_page_key = slug
+        # Sidebar Radio Navigation Options
+        page_display_names = [f"{icon} {t(k)}" for k, _, icon in page_keys]
+        curr_idx = 0
+        for i, (_, slug, _) in enumerate(page_keys):
+            if slug == st.session_state["active_nav_key"]:
+                curr_idx = i
                 break
 
-        st.markdown("<div style='height: 18px;'></div>", unsafe_allow_html=True)
+        selected_radio_name = st.radio(
+            "Sidebar Navigation Menu",
+            page_display_names,
+            index=curr_idx,
+            label_visibility="collapsed",
+            key="sidebar_nav_radio"
+        )
+
+        for i, (k, slug, icon) in enumerate(page_keys):
+            if f"{icon} {t(k)}" == selected_radio_name:
+                if st.session_state["active_nav_key"] != slug:
+                    st.session_state["active_nav_key"] = slug
+                    st.rerun()
+                break
+
+        st.markdown("<div style='height: 14px;'></div>", unsafe_allow_html=True)
 
         # Fast Role Switcher in Sidebar
         with st.expander(t("switch_persona"), expanded=False):
@@ -152,7 +165,7 @@ def main():
                     st.rerun()
 
         # Model Readiness Diagnostic in Sidebar
-        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
         if model_status["is_custom"]:
             st.markdown(f"""
                 <div style="padding: 10px 12px; border-radius: 8px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); font-size: 0.74rem; color: #10B981;">
@@ -167,7 +180,7 @@ def main():
             """, unsafe_allow_html=True)
 
         st.markdown(f"""
-            <div style="margin-top: 24px; padding: 12px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.68rem; color: #71717A;">
+            <div style="margin-top: 20px; padding: 10px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.68rem; color: #71717A;">
                 {t('footer_sub')}
             </div>
         """, unsafe_allow_html=True)
@@ -175,22 +188,38 @@ def main():
     # 3. Top Control Room Telemetry Header
     render_top_telemetry_bar(user, model_status)
 
-    # 4. Page Routing
-    if selected_page_key == "overview":
+    # 4. Top Quick Module Navigation Bar (Ensures 100% visibility even if sidebar is collapsed)
+    active_slug = st.session_state["active_nav_key"]
+    top_cols = st.columns(len(page_keys))
+    for idx, (k, slug, icon) in enumerate(page_keys):
+        with top_cols[idx]:
+            is_active = (slug == active_slug)
+            short_title = t(k).replace("📊 ", "").replace("🔍 ", "").replace("📋 ", "").replace("🗺️ ", "").replace("⚡ ", "").replace("📈 ", "").replace("📄 ", "").replace("⚙️ ", "")
+            btn_label = f"{icon} {short_title}"
+            btn_type = "primary" if is_active else "secondary"
+            if st.button(btn_label, key=f"top_nav_{slug}", use_container_width=True, type=btn_type):
+                if st.session_state["active_nav_key"] != slug:
+                    st.session_state["active_nav_key"] = slug
+                    st.rerun()
+
+    st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
+
+    # 5. Page Routing
+    if active_slug == "overview":
         render_overview()
-    elif selected_page_key == "detect":
+    elif active_slug == "detect":
         render_detection_page()
-    elif selected_page_key == "reports":
+    elif active_slug == "reports":
         render_reports_page()
-    elif selected_page_key == "map":
+    elif active_slug == "map":
         render_map_page()
-    elif selected_page_key == "queue":
+    elif active_slug == "queue":
         render_queue_page()
-    elif selected_page_key == "analytics":
+    elif active_slug == "analytics":
         render_analytics_page()
-    elif selected_page_key == "export":
+    elif active_slug == "export":
         render_export_page()
-    elif selected_page_key == "settings":
+    elif active_slug == "settings":
         render_settings_page()
 
 if __name__ == "__main__":
