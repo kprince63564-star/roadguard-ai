@@ -41,7 +41,7 @@ def render_overview():
 
     # User Tutorial & Walkthrough Video Player
     # Always show tutorial section — uses YouTube embed so it works on any device/server
-    YOUTUBE_TUTORIAL_URL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"  # Replace with your actual tutorial video URL
+    YOUTUBE_TUTORIAL_URL = "https://www.youtube.com/watch?v=y0uMjasVgIY"  # Replace with your actual tutorial video URL
     with st.expander(t("video_expander_title"), expanded=True):
         col_v1, col_v2 = st.columns([3, 1])
         with col_v1:
@@ -58,15 +58,13 @@ def render_overview():
                     f"""
                     <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">
                         <iframe
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            src="https://www.youtube.com/embed/y0uMjasVgIY"
                             style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:12px;"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <p style="font-size:0.75rem;color:#94A3B8;margin-top:6px;">
-                        📹 Tutorial video — replace the YouTube link in <code>overview.py</code> with your own video URL.
-                    </p>
+                    
                     """,
                     unsafe_allow_html=True,
                 )
