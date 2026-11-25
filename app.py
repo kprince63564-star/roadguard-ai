@@ -176,6 +176,50 @@ def main():
     # 3. Top Control Room Telemetry Header
     render_top_telemetry_bar(user, model_status)
 
+    # 3b. Persistent Language + Role switcher bar (visible even when sidebar is collapsed)
+    cur_lang = get_current_language()
+    role = user.get("role", "authority")
+
+    ctrl_col1, ctrl_col2, ctrl_col3, ctrl_col4, ctrl_spacer = st.columns([1.1, 1.1, 1.3, 1.3, 5])
+    with ctrl_col1:
+        if st.button(
+            "🇬🇧 English",
+            key="top_lang_en",
+            use_container_width=True,
+            type="primary" if cur_lang == "en" else "secondary",
+        ):
+            from utils.i18n import set_language
+            set_language("en")
+            st.rerun()
+    with ctrl_col2:
+        if st.button(
+            "🇮🇳 हिंदी",
+            key="top_lang_hi",
+            use_container_width=True,
+            type="primary" if cur_lang == "hi" else "secondary",
+        ):
+            from utils.i18n import set_language
+            set_language("hi")
+            st.rerun()
+    with ctrl_col3:
+        if role == "authority":
+            if st.button("👷 Municipal View", key="top_role_authority", use_container_width=True, type="primary"):
+                pass  # already active
+        else:
+            if st.button("👷 Municipal View", key="top_role_authority", use_container_width=True, type="secondary"):
+                switch_role("authority")
+                st.rerun()
+    with ctrl_col4:
+        if role == "citizen":
+            if st.button("🧑 Citizen View", key="top_role_citizen", use_container_width=True, type="primary"):
+                pass  # already active
+        else:
+            if st.button("🧑 Citizen View", key="top_role_citizen", use_container_width=True, type="secondary"):
+                switch_role("citizen")
+                st.rerun()
+
+    st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
+
     # 4. Top Quick Module Navigation Bar (Ensures 100% visibility even if sidebar is collapsed)
     active_slug = st.session_state["active_nav_key"]
     top_cols = st.columns(len(page_keys))
