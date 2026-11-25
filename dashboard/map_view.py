@@ -78,13 +78,29 @@ def render_map_page():
         map_center = DEFAULT_MAP_CENTER
         zoom_level = DEFAULT_MAP_ZOOM
 
-    # Initialize Folium Map
+    # Initialize Folium Map — using OpenStreetMap (free, no API key ever required)
+    # We add a dark CartoDB tile layer on top; if unavailable, OSM base still shows.
     m = folium.Map(
         location=map_center,
         zoom_start=zoom_level,
-        tiles="CartoDB dark_matter",  # Matches our dark GovTech SaaS design
+        tiles=None,          # We add tiles manually below so we can control fallback
         control_scale=True
     )
+    # Primary: CartoDB dark matter (free, no key needed via Folium's built-in CDN)
+    folium.TileLayer(
+        tiles="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        name="Dark Map",
+        max_zoom=20,
+        subdomains="abcd",
+    ).add_to(m)
+    # Fallback layer (always visible in layer control if dark tiles fail)
+    folium.TileLayer(
+        tiles="OpenStreetMap",
+        name="Standard Map (Fallback)",
+        show=False,
+    ).add_to(m)
+    folium.LayerControl().add_to(m)
 
     # Marker Clustering
     marker_cluster = MarkerCluster(name="Damage Clusters").add_to(m)

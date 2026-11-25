@@ -260,8 +260,16 @@ def render_detection_page():
         picker_map = folium.Map(
             location=[cur_lat, cur_lon],
             zoom_start=13,
-            tiles="CartoDB dark_matter"
+            tiles=None,
         )
+        # Use direct tile URL — no API key required
+        folium.TileLayer(
+            tiles="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+            attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            name="Dark Map",
+            subdomains="abcd",
+            max_zoom=20,
+        ).add_to(picker_map)
         if st.session_state.get("detect_loc_source") != "Not Provided":
             folium.Marker(
                 [cur_lat, cur_lon],
